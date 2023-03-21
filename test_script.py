@@ -91,3 +91,24 @@ def getValidLinks(links_list : list):
         if (response.status_code in range(200,300)):
             valid_links.append(link)
     return valid_links
+
+
+# This function takes a list of sub-domains and a domain name as input and sends a GET request to each sub-domain to check if the sub-domain is valid.
+# If the sub-domain is valid (status code in range 200-299), the sub-domain is added to a list of valid sub-domains.
+def getValidSubDomains(sub_domains_list,url):
+    valid_domains = []
+    for sub_domain in sub_domains_list:
+        try:
+            request = requests.get("https://" + sub_domain + '.' + url)
+        except requests.exceptions.RequestException:
+            continue
+        except requests.exceptions.HTTPError:
+            continue
+        except requests.exceptions.MissingSchema:
+            continue
+        status_code = request.status_code
+        
+        if (status_code in range(200,300)):
+            valid_domains.append("https://" +sub_domain + "." + url)
+
+    return valid_domains
