@@ -36,3 +36,24 @@ def getHrefList(html):
     pattern = r'<(?:a|link|image|audio|video) href="(.+?)">'
     href_list = re.findall(pattern,html)
     return href_list
+
+# This function takes a string as input and removes all trailing whitespace characters.
+# It returns the modified string with the whitespace removed.
+def removeSpace(str1):
+    pattern = re.compile(r"\s.*$")
+    str2 = pattern.sub("", str1)
+    return str2
+
+# This function takes a string as input and removes any query parameters (i.e., anything after a '?' character).
+# It returns the modified string with the query parameters removed.
+def removeQuestionMark(str1):
+    pattern = re.compile(r"\?.*$")
+    str2 = pattern.sub("", str1)
+    return str2
+
+# This function takes a string as input and removes any path parameters (i.e., anything after a '\' character).
+# It returns the modified string with the path parameters removed.
+def removePathParams(str1):
+    pattern = re.compile(r"\\.*$")
+    str2 = pattern.sub("", str1)
+    return str2
