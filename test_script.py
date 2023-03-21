@@ -131,4 +131,39 @@ def getValidDirectories(dirs_list,url):
         if (status_code in range(200,300)):
             valid_directories.append(url + "/" + directory )
 
-    return valid_directories 
+    return valid_directories
+
+
+def main():
+
+    # Put in a set to remove duplicates
+    sub_domains_list = set(openFile("subdomains_dictionary.bat"))
+    sub_domains_list = list(sub_domains_list)
+
+    # Put in a set to remove duplicates
+    dirs_list = set(openFile("dirs_dictionary.bat"))
+    
+    dirs_list = list(dirs_list)
+
+
+    url = "aub.edu.lb"
+
+    # Sends HTTP requests to URLs constructed by appending each subdomain to the base URL "aub.edu.lb", and saves valid URLs in a file named "valid_subdomains.bat".
+    valid_subdomains = getValidSubDomains(sub_domains_list,url)
+    writeToFile(valid_subdomains,"valid_subdomains.bat")
+
+    # Sends HTTP requests to URLs constructed by appending each directory to the base URL "aub.edu.lb", and saves valid URLs in a file named "valid_directories.bat".
+    valid_directories = getValidDirectories(dirs_list,url)
+    writeToFile(valid_directories,"valid_directories.bat")
+
+    
+    # Put in a set to remove duplicates
+    valid_links = set(getValidLinks(url))
+    valid_links = list(valid_links)
+
+    # Collects all valid links from the base URL "aub.edu.lb" and saves them in a file named "files_output.bat".
+    writeToFile(valid_links,"files_output.bat")
+
+    
+main()
+
