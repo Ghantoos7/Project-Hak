@@ -86,6 +86,8 @@ def getValidLinks(links_list : list):
             continue
         except requests.exceptions.HTTPError:
             continue
+        except requests.exceptions.MissingSchema:
+            continue
         if (response.status_code in range(200,300)):
             valid_links.append(link)
     return valid_links
