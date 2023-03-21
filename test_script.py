@@ -64,7 +64,6 @@ def removePathParams(str1):
     return str2
 
 
-
 # This function takes a list of hrefs and removes any query or path parameters before returning the cleaned links.
 def validateLinks(href_list : list):
     links = []
@@ -75,3 +74,13 @@ def validateLinks(href_list : list):
         links.append(link_removed_path)
     return links
 
+
+# This function takes a list of links and sends a GET request to each link to check if the link is valid.
+# If the link is valid (status code in range 200-299), the link is added to a list of valid links. 
+def getValidLinks(links_list : list):
+    valid_links = []
+    for link in links_list:
+        response = requests.get(link)
+        if (response.status_code in range(200,300)):
+            valid_links.append(link)
+    return valid_links
