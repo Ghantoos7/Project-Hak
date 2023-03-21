@@ -169,5 +169,4 @@ def main():
     # Collects all valid links from the base URL "lau.edu.lb" (can be changed) and saves them in a file named "files_output.bat".
     writeToFile(valid_links,"files_output.bat")
 
- 
 main()
