@@ -146,6 +146,7 @@ def main():
     dirs_list = list(dirs_list)
 
 
+    # To be changed depending on the website
     url = "aub.edu.lb"
 
     # Sends HTTP requests to URLs constructed by appending each subdomain to the base URL "aub.edu.lb", and saves valid URLs in a file named "valid_subdomains.bat".
@@ -161,7 +162,7 @@ def main():
     valid_links = set(getValidLinks(url))
     valid_links = list(valid_links)
 
-    # Collects all valid links from the base URL "aub.edu.lb" and saves them in a file named "files_output.bat".
+    # Collects all valid links from the base URL "aub.edu.lb" (can be changed) and saves them in a file named "files_output.bat".
     writeToFile(valid_links,"files_output.bat")
 
     
