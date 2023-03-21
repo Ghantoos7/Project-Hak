@@ -84,7 +84,8 @@ def getValidLinks(links_list : list):
             response = requests.get(link)
         except requests.exceptions.RequestException:
             continue
-        
+        except requests.exceptions.HTTPError:
+            continue
         if (response.status_code in range(200,300)):
             valid_links.append(link)
     return valid_links
