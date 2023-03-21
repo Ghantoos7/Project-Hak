@@ -80,7 +80,11 @@ def validateLinks(href_list : list):
 def getValidLinks(links_list : list):
     valid_links = []
     for link in links_list:
-        response = requests.get(link)
+        try:
+            response = requests.get(link)
+        except requests.exceptions.RequestException:
+            continue
+        
         if (response.status_code in range(200,300)):
             valid_links.append(link)
     return valid_links
