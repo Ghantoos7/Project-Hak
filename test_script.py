@@ -92,6 +92,10 @@ def getValidLinks(links_list : list):
             valid_links.append(link)
     return valid_links
 
+def getValidLinksList(url):
+    href_list = getHrefList(getHtml(openUrl(url)))
+    return getValidLinks(validateLinks(href_list))
+
 
 # This function takes a list of sub-domains and a domain name as input and sends a GET request to each sub-domain to check if the sub-domain is valid.
 # If the sub-domain is valid (status code in range 200-299), the sub-domain is added to a list of valid sub-domains.
@@ -147,7 +151,7 @@ def main():
 
 
     # To be changed depending on the website
-    url = "aub.edu.lb"
+    url = "lau.edu.lb"
 
     # Sends HTTP requests to URLs constructed by appending each subdomain to the base URL "aub.edu.lb", and saves valid URLs in a file named "valid_subdomains.bat".
     valid_subdomains = getValidSubDomains(sub_domains_list,url)
@@ -159,12 +163,11 @@ def main():
 
     
     # Put in a set to remove duplicates
-    valid_links = set(getValidLinks(url))
+    valid_links = set(getValidLinksList(url))
     valid_links = list(valid_links)
 
-    # Collects all valid links from the base URL "aub.edu.lb" (can be changed) and saves them in a file named "files_output.bat".
+    # Collects all valid links from the base URL "lau.edu.lb" (can be changed) and saves them in a file named "files_output.bat".
     writeToFile(valid_links,"files_output.bat")
 
-    
+ 
 main()
-
