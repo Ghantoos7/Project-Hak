@@ -112,3 +112,23 @@ def getValidSubDomains(sub_domains_list,url):
             valid_domains.append("https://" +sub_domain + "." + url)
 
     return valid_domains
+
+
+# This function takes a list of directories and a domain name as input and sends a GET request to each directory to check if the directory is valid.
+# If the directory is valid (status code in range 200-207), it is added to a list of valid directories.
+def getValidDirectories(dirs_list,url):
+    valid_directories = []
+    for directory in dirs_list:
+        try:
+            request = requests.get(url + "/" + directory)
+        except requests.exceptions.RequestException:
+            continue
+        except requests.exceptions.HTTPError:
+            continue
+        except requests.exceptions.MissingSchema:
+            continue
+        status_code = request.status_code
+        if (status_code in range(200,300)):
+            valid_directories.append(url + "/" + directory )
+
+    return valid_directories 
